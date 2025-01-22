@@ -14,6 +14,14 @@ const Navbar = () => {
               A Better City
             </Link>
           </div>
+          <div className="flex items-center">
+            <Link 
+              to="/admin" 
+              className="text-sm text-gray-600 hover:text-primary transition-colors"
+            >
+              Admin Dashboard
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
