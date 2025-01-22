@@ -18,7 +18,12 @@ const Navbar = () => {
             <a href="#about" className="text-gray-600 hover:text-primary">About</a>
             <a href="#programs" className="text-gray-600 hover:text-primary">Programs</a>
             <a href="#contact" className="text-gray-600 hover:text-primary">Contact</a>
-            <Button className="bg-accent hover:bg-accent-600">Donate Now</Button>
+            <Button 
+              className="bg-accent hover:bg-accent-600"
+              onClick={() => window.open('https://gofund.me/8dea43c1', '_blank')}
+            >
+              Donate Now
+            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -39,7 +44,12 @@ const Navbar = () => {
               <a href="#about" className="block px-3 py-2 text-gray-600 hover:text-primary">About</a>
               <a href="#programs" className="block px-3 py-2 text-gray-600 hover:text-primary">Programs</a>
               <a href="#contact" className="block px-3 py-2 text-gray-600 hover:text-primary">Contact</a>
-              <Button className="w-full mt-4 bg-accent hover:bg-accent-600">Donate Now</Button>
+              <Button 
+                className="w-full mt-4 bg-accent hover:bg-accent-600"
+                onClick={() => window.open('https://gofund.me/8dea43c1', '_blank')}
+              >
+                Donate Now
+              </Button>
             </div>
           </div>
         )}
