@@ -1,4 +1,5 @@
 import { Instagram } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -43,6 +44,14 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#" className="hover:text-accent transition-colors">Volunteer</a>
+              </li>
+              <li>
+                <Link 
+                  to="/admin" 
+                  className="hover:text-accent transition-colors"
+                >
+                  Admin Dashboard
+                </Link>
               </li>
             </ul>
           </div>
