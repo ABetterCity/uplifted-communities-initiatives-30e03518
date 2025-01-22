@@ -5,8 +5,17 @@ const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="relative bg-primary-900 text-white">
-      <div className="absolute inset-0 bg-gradient-to-r from-primary-900/95 to-primary-800/95"></div>
+    <div className="relative bg-primary-900 text-white min-h-[80vh]">
+      <div 
+        className="absolute inset-0 bg-gradient-to-r from-primary-900/95 to-primary-800/95"
+        style={{
+          backgroundImage: 'url("/lovable-uploads/d9b6b27c-320b-422f-897c-e4c5a986f5df.png")',
+          backgroundSize: '600px',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: '0.15'
+        }}
+      ></div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
         <div className="animate-fadeIn">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
