@@ -17,7 +17,12 @@ const Footer = () => {
               <a href="#" className="hover:text-accent transition-colors">
                 <Twitter size={20} />
               </a>
-              <a href="#" className="hover:text-accent transition-colors">
+              <a 
+                href="https://www.instagram.com/a_better_city_org/?utm_source=ig_web_button_share_sheet" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-accent transition-colors"
+              >
                 <Instagram size={20} />
               </a>
             </div>
