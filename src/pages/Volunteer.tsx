@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -42,26 +42,33 @@ const Volunteer = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      console.log("Submitting application:", values); // Debug log
+      
       const { error } = await supabase
         .from('applications')
-        .insert({
+        .insert([{
           name: `${values.firstName} ${values.lastName}`,
           email: values.email,
           phone: values.phone,
           reason: values.reason,
           signature: `${values.firstName} ${values.lastName}`,
           status: 'pending'
-        });
+        }]);
 
-      if (error) throw error;
+      if (error) {
+        console.error("Supabase error:", error); // Debug log
+        throw error;
+      }
 
       toast({
         title: "Application Submitted!",
         description: "Thank you for your interest in volunteering. We'll be in touch soon!",
       });
       
+      // Wait for toast to be visible before navigating
       setTimeout(() => navigate("/"), 2000);
     } catch (error: any) {
+      console.error("Submission error:", error); // Debug log
       toast({
         title: "Error",
         description: error.message,
