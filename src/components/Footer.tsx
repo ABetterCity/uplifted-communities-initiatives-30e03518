@@ -51,7 +51,14 @@ const Footer = () => {
                 <a href="#programs" className="hover:text-accent transition-colors">Our Programs</a>
               </li>
               <li>
-                <a href="#" className="hover:text-accent transition-colors">Donate</a>
+                <a 
+                  href="https://gofund.me/8dea43c1" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-accent transition-colors"
+                >
+                  Donate
+                </a>
               </li>
               <li>
                 <a href="#" className="hover:text-accent transition-colors">Volunteer</a>
