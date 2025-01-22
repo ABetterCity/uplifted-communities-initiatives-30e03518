@@ -10,10 +10,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { LogOut } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { useToast } from "@/hooks/use-toast";
 
 const Admin = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -33,6 +37,23 @@ const Admin = () => {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  const handleSignOut = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast({
+        title: "Signed out successfully",
+        description: "You have been logged out of your account",
+      });
+      navigate("/");
+    } catch (error: any) {
+      toast({
+        title: "Error signing out",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  };
 
   const { data: applications, isLoading } = useQuery({
     queryKey: ["applications"],
@@ -55,7 +76,17 @@ const Admin = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="container mx-auto px-4 pt-24 pb-16">
-        <h1 className="text-4xl font-bold mb-8">Applications Pool</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-bold">Applications Pool</h1>
+          <Button 
+            variant="outline" 
+            onClick={handleSignOut}
+            className="gap-2"
+          >
+            <LogOut className="h-4 w-4" />
+            Sign Out
+          </Button>
+        </div>
         <div className="bg-white rounded-lg shadow">
           <Table>
             <TableHeader>
