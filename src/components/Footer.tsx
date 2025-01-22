@@ -1,10 +1,10 @@
-import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { Facebook, Instagram, Twitter } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">A Better City</h3>
             <p className="mb-4">
@@ -20,24 +20,6 @@ const Footer = () => {
               <a href="#" className="hover:text-accent transition-colors">
                 <Instagram size={20} />
               </a>
-            </div>
-          </div>
-          
-          <div>
-            <h3 className="text-white text-lg font-semibold mb-4">Contact Us</h3>
-            <div className="space-y-3">
-              <div className="flex items-center">
-                <MapPin size={20} className="mr-2" />
-                <span>Chicago, IL</span>
-              </div>
-              <div className="flex items-center">
-                <Phone size={20} className="mr-2" />
-                <span>(123) 456-7890</span>
-              </div>
-              <div className="flex items-center">
-                <Mail size={20} className="mr-2" />
-                <span>info@abettercity.org</span>
-              </div>
             </div>
           </div>
           
