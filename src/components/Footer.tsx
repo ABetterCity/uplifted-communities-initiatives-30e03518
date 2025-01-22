@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Instagram } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -11,12 +11,6 @@ const Footer = () => {
               Building stronger communities through compassion and collaboration.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-accent transition-colors">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="hover:text-accent transition-colors">
-                <Twitter size={20} />
-              </a>
               <a 
                 href="https://www.instagram.com/a_better_city_org/?utm_source=ig_web_button_share_sheet" 
                 target="_blank" 
