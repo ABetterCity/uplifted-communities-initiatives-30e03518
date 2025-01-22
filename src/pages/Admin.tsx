@@ -63,13 +63,26 @@ const Admin = () => {
         .select("*")
         .order("created_at", { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error("Error fetching applications:", error);
+        throw error;
+      }
+      
       return data;
     },
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="container mx-auto px-4 pt-24 pb-16">
+          <div className="flex justify-center items-center">
+            Loading...
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

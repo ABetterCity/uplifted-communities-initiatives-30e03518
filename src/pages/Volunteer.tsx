@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import Navbar from "@/components/Navbar";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -39,13 +40,34 @@ const Volunteer = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    toast({
-      title: "Application Submitted!",
-      description: "Thank you for your interest in volunteering. We'll be in touch soon!",
-    });
-    setTimeout(() => navigate("/"), 2000);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const { error } = await supabase
+        .from('applications')
+        .insert({
+          name: `${values.firstName} ${values.lastName}`,
+          email: values.email,
+          phone: values.phone,
+          reason: values.reason,
+          signature: `${values.firstName} ${values.lastName}`,
+          status: 'pending'
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Application Submitted!",
+        description: "Thank you for your interest in volunteering. We'll be in touch soon!",
+      });
+      
+      setTimeout(() => navigate("/"), 2000);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
