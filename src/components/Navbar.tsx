@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,9 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-primary">A Better City</span>
+            <Link to="/" className="text-2xl font-bold text-primary hover:text-primary/90 transition-colors">
+              A Better City
+            </Link>
           </div>
           
           {/* Desktop menu */}
