@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Table,
@@ -10,14 +10,22 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { LogOut } from "lucide-react";
+import { LogOut, Trash2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { useToast } from "@/hooks/use-toast";
 
 const Admin = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -72,6 +80,56 @@ const Admin = () => {
     },
   });
 
+  const updateStatusMutation = useMutation({
+    mutationFn: async ({ id, status }: { id: string; status: string }) => {
+      const { error } = await supabase
+        .from("applications")
+        .update({ status })
+        .eq("id", id);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
+      toast({
+        title: "Status updated",
+        description: "Application status has been updated successfully",
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Error updating status",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase
+        .from("applications")
+        .delete()
+        .eq("id", id);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
+      toast({
+        title: "Application deleted",
+        description: "The application has been removed successfully",
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Error deleting application",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background">
@@ -109,6 +167,7 @@ const Admin = () => {
                 <TableHead>Phone</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Submitted</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -118,10 +177,38 @@ const Admin = () => {
                   <TableCell>{application.email}</TableCell>
                   <TableCell>{application.phone}</TableCell>
                   <TableCell>
-                    <span className="capitalize">{application.status}</span>
+                    <Select
+                      defaultValue={application.status}
+                      onValueChange={(value) =>
+                        updateStatusMutation.mutate({ id: application.id, status: value })
+                      }
+                    >
+                      <SelectTrigger className="w-[140px]">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="pending">Pending</SelectItem>
+                        <SelectItem value="approved">Approved</SelectItem>
+                        <SelectItem value="rejected">Rejected</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </TableCell>
                   <TableCell>
                     {new Date(application.created_at).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => {
+                        if (window.confirm("Are you sure you want to delete this application?")) {
+                          deleteMutation.mutate(application.id);
+                        }
+                      }}
+                      className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
