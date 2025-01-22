@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="relative bg-primary-900 text-white">
       <div className="absolute inset-0 bg-gradient-to-r from-primary-900/95 to-primary-800/95"></div>
@@ -13,10 +16,20 @@ const Hero = () => {
             Empowering individuals and families in the Chicagoland area through sustainable solutions and community support.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button className="bg-accent hover:bg-accent-600 text-lg px-8 py-6">
+            <Button 
+              className="bg-accent hover:bg-accent-600 text-lg px-8 py-6"
+              onClick={() => navigate('/volunteer')}
+            >
               Get Involved
             </Button>
-            <Button variant="outline" className="bg-transparent border-2 border-white hover:bg-white/10 text-lg px-8 py-6">
+            <Button 
+              variant="outline" 
+              className="bg-transparent border-2 border-white hover:bg-white/10 text-lg px-8 py-6"
+              onClick={() => {
+                const aboutSection = document.querySelector('#about');
+                aboutSection?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               Learn More
             </Button>
           </div>
