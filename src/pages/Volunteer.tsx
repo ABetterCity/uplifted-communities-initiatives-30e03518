@@ -42,9 +42,9 @@ const Volunteer = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      console.log("Submitting application:", values); // Debug log
+      console.log("Submitting application:", values);
       
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('applications')
         .insert([{
           name: `${values.firstName} ${values.lastName}`,
@@ -53,10 +53,12 @@ const Volunteer = () => {
           reason: values.reason,
           signature: `${values.firstName} ${values.lastName}`,
           status: 'pending'
-        }]);
+        }])
+        .select()
+        .single();
 
       if (error) {
-        console.error("Supabase error:", error); // Debug log
+        console.error("Supabase error:", error);
         throw error;
       }
 
@@ -65,13 +67,12 @@ const Volunteer = () => {
         description: "Thank you for your interest in volunteering. We'll be in touch soon!",
       });
       
-      // Wait for toast to be visible before navigating
       setTimeout(() => navigate("/"), 2000);
     } catch (error: any) {
-      console.error("Submission error:", error); // Debug log
+      console.error("Submission error:", error);
       toast({
         title: "Error",
-        description: error.message,
+        description: error.message || "Failed to submit application. Please try again.",
         variant: "destructive",
       });
     }
