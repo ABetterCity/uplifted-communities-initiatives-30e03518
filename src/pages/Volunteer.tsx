@@ -44,7 +44,7 @@ const Volunteer = () => {
     try {
       console.log("Submitting application:", values);
       
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('applications')
         .insert([{
           name: `${values.firstName} ${values.lastName}`,
@@ -53,9 +53,7 @@ const Volunteer = () => {
           reason: values.reason,
           signature: `${values.firstName} ${values.lastName}`,
           status: 'pending'
-        }])
-        .select()
-        .single();
+        }]);
 
       if (error) {
         console.error("Supabase error:", error);
