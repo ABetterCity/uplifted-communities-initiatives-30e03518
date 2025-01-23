@@ -60,10 +60,11 @@ const Volunteer = () => {
 
       toast({
         title: "Application Submitted!",
-        description: "Thank you for your interest in volunteering. We'll be in touch soon!",
+        description: "Thank you for your interest in volunteering. Redirecting to application pool...",
       });
       
-      setTimeout(() => navigate("/"), 2000);
+      // Immediately redirect to admin page
+      navigate("/admin");
     } catch (error: any) {
       console.error("Submission error:", error);
       toast({
