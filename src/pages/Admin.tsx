@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -26,12 +26,20 @@ const Admin = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const [isAuthChecking, setIsAuthChecking] = useState(true);
 
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) {
+          navigate("/auth");
+        }
+      } catch (error) {
+        console.error("Auth check error:", error);
         navigate("/auth");
+      } finally {
+        setIsAuthChecking(false);
       }
     };
 
@@ -130,13 +138,13 @@ const Admin = () => {
     },
   });
 
-  if (isLoading) {
+  if (isAuthChecking || isLoading) {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
         <div className="container mx-auto px-4 pt-24 pb-16">
           <div className="flex justify-center items-center">
-            Loading...
+            <div className="animate-pulse">Loading...</div>
           </div>
         </div>
       </div>
