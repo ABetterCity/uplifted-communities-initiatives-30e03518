@@ -44,16 +44,14 @@ const Volunteer = () => {
     try {
       console.log("Submitting application:", values);
       
-      const { error } = await supabase
-        .from('applications')
-        .insert([{
-          name: `${values.firstName} ${values.lastName}`,
-          email: values.email,
-          phone: values.phone,
-          reason: values.reason,
-          signature: `${values.firstName} ${values.lastName}`,
-          status: 'pending'
-        }]);
+      const { error } = await supabase.from('applications').insert({
+        name: `${values.firstName} ${values.lastName}`,
+        email: values.email,
+        phone: values.phone,
+        reason: values.reason,
+        signature: `${values.firstName} ${values.lastName}`,
+        status: 'pending'
+      });
 
       if (error) {
         console.error("Supabase error:", error);
