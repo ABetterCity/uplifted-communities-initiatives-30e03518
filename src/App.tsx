@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,6 +8,7 @@ import Index from "./pages/Index";
 import Volunteer from "./pages/Volunteer";
 import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
+import ReachOut from "./pages/ReachOut";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +23,7 @@ const App = () => (
           <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/reach-out" element={<ReachOut />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

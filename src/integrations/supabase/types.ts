@@ -42,6 +42,36 @@ export type Database = {
         }
         Relationships: []
       }
+      survey_responses: {
+        Row: {
+          created_at: string
+          difficulties: string
+          id: string
+          source: string
+          suggestions: string
+          town: string
+          zip_code: string
+        }
+        Insert: {
+          created_at?: string
+          difficulties: string
+          id?: string
+          source: string
+          suggestions: string
+          town: string
+          zip_code: string
+        }
+        Update: {
+          created_at?: string
+          difficulties?: string
+          id?: string
+          source?: string
+          suggestions?: string
+          town?: string
+          zip_code?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
