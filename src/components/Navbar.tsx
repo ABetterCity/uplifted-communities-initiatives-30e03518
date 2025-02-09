@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -12,6 +13,14 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="text-2xl font-bold text-primary hover:text-primary/90 transition-colors">
               A Better City
+            </Link>
+          </div>
+          <div className="flex items-center">
+            <Link 
+              to="/reach-out" 
+              className="px-4 py-2 text-primary hover:text-primary/90 transition-colors font-medium"
+            >
+              Reach Out
             </Link>
           </div>
         </div>
