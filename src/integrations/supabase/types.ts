@@ -42,6 +42,36 @@ export type Database = {
         }
         Relationships: []
       }
+      bulletin_posts: {
+        Row: {
+          author_name: string
+          content: string
+          created_at: string
+          id: string
+          location: string | null
+          mood: string | null
+          title: string
+        }
+        Insert: {
+          author_name: string
+          content: string
+          created_at?: string
+          id?: string
+          location?: string | null
+          mood?: string | null
+          title: string
+        }
+        Update: {
+          author_name?: string
+          content?: string
+          created_at?: string
+          id?: string
+          location?: string | null
+          mood?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
       survey_responses: {
         Row: {
           created_at: string
