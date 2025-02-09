@@ -8,7 +8,7 @@ interface Post {
   created_at: string;
   title: string;
   content: string;
-  author_name: string;
+  author_name: string | null;
   location: string | null;
   mood: string | null;
 }
@@ -54,7 +54,7 @@ export default function BulletinPosts() {
           </div>
           <p className="text-gray-700 whitespace-pre-wrap">{post.content}</p>
           <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-            <p>Posted by: {post.author_name}</p>
+            {post.author_name && <p>Posted by: {post.author_name}</p>}
             {post.location && <p>From: {post.location}</p>}
             {post.mood && <p>Feeling: {post.mood}</p>}
           </div>

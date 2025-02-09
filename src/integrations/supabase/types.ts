@@ -44,7 +44,7 @@ export type Database = {
       }
       bulletin_posts: {
         Row: {
-          author_name: string
+          author_name: string | null
           content: string
           created_at: string
           id: string
@@ -53,7 +53,7 @@ export type Database = {
           title: string
         }
         Insert: {
-          author_name: string
+          author_name?: string | null
           content: string
           created_at?: string
           id?: string
@@ -62,7 +62,7 @@ export type Database = {
           title: string
         }
         Update: {
-          author_name?: string
+          author_name?: string | null
           content?: string
           created_at?: string
           id?: string

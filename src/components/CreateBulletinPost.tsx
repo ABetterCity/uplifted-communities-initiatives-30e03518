@@ -23,7 +23,7 @@ export default function CreateBulletinPost({ onPostCreated }: { onPostCreated: (
       const { error } = await supabase.from("bulletin_posts").insert({
         title,
         content,
-        author_name: authorName,
+        author_name: authorName || null,
         location,
         mood,
       });
@@ -71,12 +71,11 @@ export default function CreateBulletinPost({ onPostCreated }: { onPostCreated: (
       </div>
 
       <div>
-        <Label htmlFor="authorName">Your Name</Label>
+        <Label htmlFor="authorName">Your Name (optional)</Label>
         <Input
           id="authorName"
           value={authorName}
           onChange={(e) => setAuthorName(e.target.value)}
-          required
           placeholder="Enter your name"
         />
       </div>
