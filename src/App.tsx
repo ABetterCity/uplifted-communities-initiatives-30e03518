@@ -9,6 +9,7 @@ import Volunteer from "./pages/Volunteer";
 import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import ReachOut from "./pages/ReachOut";
+import BulletinBoard from "./pages/BulletinBoard";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/admin" element={<Admin />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/reach-out" element={<ReachOut />} />
+          <Route path="/bulletin-board" element={<BulletinBoard />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
