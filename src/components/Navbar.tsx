@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   DropdownMenu,
@@ -23,9 +23,8 @@ const Navbar = () => {
           </div>
           <div className="flex items-center">
             <DropdownMenu>
-              <DropdownMenuTrigger className="px-4 py-2 text-primary hover:text-primary/90 transition-colors font-medium inline-flex items-center gap-1">
-                Connect
-                <ChevronDown className="h-4 w-4" />
+              <DropdownMenuTrigger className="p-2 text-primary hover:text-primary/90 transition-colors">
+                <Menu className="h-6 w-6" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
                 <DropdownMenuItem asChild>
