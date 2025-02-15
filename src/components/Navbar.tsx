@@ -37,6 +37,11 @@ const Navbar = () => {
                     Bulletin Board
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/roadmap" className="w-full">
+                    Road Map
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
