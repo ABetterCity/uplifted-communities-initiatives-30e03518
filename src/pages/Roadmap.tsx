@@ -20,17 +20,13 @@ const Roadmap = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="fixed top-16 left-0 right-0 bg-gray-50 pt-8 pb-4 z-10">
-        <div className="max-w-3xl mx-auto px-4">
-          <h1 className="text-3xl font-bold text-center mb-4 text-primary">Project Funding Goals</h1>
-          <p className="text-gray-600 text-center">
+      <main className="pt-24 pb-16 px-4">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-3xl font-bold text-center mb-8 text-primary">Project Funding Goals</h1>
+          <p className="text-gray-600 text-center mb-12">
             Track our funding progress and see how we plan to allocate resources
           </p>
-        </div>
-      </div>
-      
-      <main className="pt-48 pb-16 px-4">
-        <div className="max-w-3xl mx-auto">
+          
           {/* Funding Progress */}
           {fundingMilestones.map((fund, index) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow-sm mb-8">
