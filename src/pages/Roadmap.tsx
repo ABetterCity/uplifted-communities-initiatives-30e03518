@@ -11,7 +11,7 @@ const Roadmap = () => {
       description: "Supporting our organization's initiatives to help the Chicagoland community",
       allocation: [
         { category: "School Classroom Supplies", amount: 2000 },
-        { category: "Community Programs", amount: 2000 },
+        { category: "Community Housing & Support Services", amount: 2000 },
         { category: "Administrative Costs", amount: 1000 },
       ],
     }
