@@ -3,29 +3,6 @@ import Navbar from "@/components/Navbar";
 import { Progress } from "@/components/ui/progress";
 
 const Roadmap = () => {
-  const milestones = [
-    {
-      title: "Community Engagement",
-      progress: 75,
-      description: "Building strong relationships with local residents and organizations",
-    },
-    {
-      title: "Infrastructure Assessment",
-      progress: 60,
-      description: "Evaluating current city infrastructure and identifying areas for improvement",
-    },
-    {
-      title: "Sustainability Initiatives",
-      progress: 40,
-      description: "Implementing green solutions and environmental programs",
-    },
-    {
-      title: "Economic Development",
-      progress: 25,
-      description: "Supporting local businesses and creating job opportunities",
-    },
-  ];
-
   const fundingMilestones = [
     {
       title: "Park Renovation Fund",
@@ -45,27 +22,12 @@ const Roadmap = () => {
       <Navbar />
       <main className="pt-24 pb-16 px-4">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold text-center mb-8 text-primary">Our Road to a Better City</h1>
+          <h1 className="text-3xl font-bold text-center mb-8 text-primary">Project Funding Goals</h1>
           <p className="text-gray-600 text-center mb-12">
-            Track our progress as we work together to transform our community
+            Track our funding progress and see how we plan to allocate resources
           </p>
           
-          {/* Project Milestones */}
-          <div className="space-y-8 mb-12">
-            {milestones.map((milestone, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm animate-fadeIn" style={{ animationDelay: `${index * 150}ms` }}>
-                <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-lg font-semibold text-primary">{milestone.title}</h3>
-                  <span className="text-sm font-medium text-gray-500">{milestone.progress}%</span>
-                </div>
-                <Progress value={milestone.progress} className="h-2 mb-3" />
-                <p className="text-gray-600 text-sm">{milestone.description}</p>
-              </div>
-            ))}
-          </div>
-
           {/* Funding Progress */}
-          <h2 className="text-2xl font-bold text-center mb-6 text-primary">Funding Goals</h2>
           {fundingMilestones.map((fund, index) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow-sm mb-8">
               <div className="flex justify-between items-center mb-2">
