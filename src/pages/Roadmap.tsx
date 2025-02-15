@@ -5,14 +5,14 @@ import { Progress } from "@/components/ui/progress";
 const Roadmap = () => {
   const fundingMilestones = [
     {
-      title: "Park Renovation Fund",
+      title: "A Better City Organization Fund",
       currentAmount: 5,
       targetAmount: 5000,
-      description: "Upgrading playground equipment and creating new green spaces",
+      description: "Supporting our organization's initiatives to help the Chicagoland community",
       allocation: [
-        { category: "Playground Equipment", amount: 2500 },
-        { category: "Landscaping", amount: 1500 },
-        { category: "Benches and Facilities", amount: 1000 },
+        { category: "School Classroom Supplies", amount: 2000 },
+        { category: "Community Programs", amount: 2000 },
+        { category: "Administrative Costs", amount: 1000 },
       ],
     }
   ];
