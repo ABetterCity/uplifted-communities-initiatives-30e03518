@@ -6,7 +6,7 @@ const Roadmap = () => {
   const fundingMilestones = [
     {
       title: "Park Renovation Fund",
-      currentAmount: 2000,
+      currentAmount: 5,
       targetAmount: 5000,
       description: "Upgrading playground equipment and creating new green spaces",
       allocation: [
