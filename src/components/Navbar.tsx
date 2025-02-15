@@ -26,7 +26,7 @@ const Navbar = () => {
               <DropdownMenuTrigger className="p-2 text-primary hover:text-primary/90 transition-colors">
                 <Menu className="h-6 w-6" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuContent align="end" className="w-48 bg-white">
                 <DropdownMenuItem asChild>
                   <Link to="/reach-out" className="w-full">
                     Reach Out
