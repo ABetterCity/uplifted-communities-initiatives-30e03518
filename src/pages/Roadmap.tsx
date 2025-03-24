@@ -18,9 +18,9 @@ const Roadmap = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
-      <main className="pt-24 pb-16 px-4">
+      <main className="flex-grow pt-24 pb-16 px-4">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl font-bold text-center mb-8 text-primary">Project Funding Goals</h1>
           <p className="text-gray-600 text-center mb-12">
