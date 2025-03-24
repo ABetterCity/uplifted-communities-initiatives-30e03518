@@ -18,7 +18,7 @@ export default function BulletinPosts() {
     queryKey: ["bulletin-posts"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("bulletin_posts")
+        .from("bulletin_posts" as any)
         .select("*")
         .order("created_at", { ascending: false });
 

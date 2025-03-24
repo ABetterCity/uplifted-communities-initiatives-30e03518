@@ -9,7 +9,99 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      applications: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          phone: string
+          reason: string
+          signature: string
+          status: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          phone: string
+          reason: string
+          signature: string
+          status?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+          reason?: string
+          signature?: string
+          status?: string | null
+        }
+        Relationships: []
+      }
+      bulletin_posts: {
+        Row: {
+          author_name: string | null
+          content: string
+          created_at: string
+          id: string
+          location: string | null
+          mood: string | null
+          title: string
+        }
+        Insert: {
+          author_name?: string | null
+          content: string
+          created_at?: string
+          id?: string
+          location?: string | null
+          mood?: string | null
+          title: string
+        }
+        Update: {
+          author_name?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          location?: string | null
+          mood?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+      survey_responses: {
+        Row: {
+          created_at: string
+          difficulties: string
+          id: string
+          source: string
+          suggestions: string
+          town: string
+          zip_code: string
+        }
+        Insert: {
+          created_at?: string
+          difficulties: string
+          id?: string
+          source: string
+          suggestions: string
+          town: string
+          zip_code: string
+        }
+        Update: {
+          created_at?: string
+          difficulties?: string
+          id?: string
+          source?: string
+          suggestions?: string
+          town?: string
+          zip_code?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

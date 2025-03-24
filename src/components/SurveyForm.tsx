@@ -32,13 +32,15 @@ export function SurveyForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const { error } = await supabase.from("survey_responses").insert({
-        town: values.town,
-        zip_code: values.zipCode,
-        source: values.source,
-        difficulties: values.difficulties,
-        suggestions: values.suggestions,
-      });
+      const { error } = await supabase
+        .from("survey_responses" as any)
+        .insert({
+          town: values.town,
+          zip_code: values.zipCode,
+          source: values.source,
+          difficulties: values.difficulties,
+          suggestions: values.suggestions,
+        } as any);
 
       if (error) throw error;
 

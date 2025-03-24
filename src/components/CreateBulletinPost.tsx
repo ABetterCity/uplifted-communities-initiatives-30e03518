@@ -20,13 +20,15 @@ export default function CreateBulletinPost({ onPostCreated }: { onPostCreated: (
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase.from("bulletin_posts").insert({
-        title,
-        content,
-        author_name: authorName || null,
-        location,
-        mood,
-      });
+      const { error } = await supabase
+        .from("bulletin_posts" as any)
+        .insert({
+          title,
+          content,
+          author_name: authorName || null,
+          location,
+          mood,
+        } as any);
 
       if (error) throw error;
 

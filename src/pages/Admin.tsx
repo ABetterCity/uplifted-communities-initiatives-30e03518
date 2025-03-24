@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -21,6 +22,17 @@ import { Button } from "@/components/ui/button";
 import { LogOut, Trash2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { useToast } from "@/hooks/use-toast";
+
+interface Application {
+  id: string;
+  created_at: string;
+  name: string;
+  email: string;
+  phone: string;
+  reason: string;
+  signature: string;
+  status: string | null;
+}
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -75,7 +87,7 @@ const Admin = () => {
     queryKey: ["applications"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("applications")
+        .from("applications" as any)
         .select("*")
         .order("created_at", { ascending: false });
 
@@ -84,15 +96,15 @@ const Admin = () => {
         throw error;
       }
       
-      return data;
+      return data as Application[];
     },
   });
 
   const updateStatusMutation = useMutation({
     mutationFn: async ({ id, status }: { id: string; status: string }) => {
       const { error } = await supabase
-        .from("applications")
-        .update({ status })
+        .from("applications" as any)
+        .update({ status } as any)
         .eq("id", id);
 
       if (error) throw error;
@@ -116,7 +128,7 @@ const Admin = () => {
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       const { error } = await supabase
-        .from("applications")
+        .from("applications" as any)
         .delete()
         .eq("id", id);
 
