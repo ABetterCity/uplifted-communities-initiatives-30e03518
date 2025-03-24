@@ -7,6 +7,14 @@ import { Label } from "./ui/label";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
+interface BulletinPost {
+  title: string;
+  content: string;
+  author_name: string | null;
+  location: string | null;
+  mood: string | null;
+}
+
 export default function CreateBulletinPost({ onPostCreated }: { onPostCreated: () => void }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -20,15 +28,17 @@ export default function CreateBulletinPost({ onPostCreated }: { onPostCreated: (
     setIsSubmitting(true);
 
     try {
+      const newPost: BulletinPost = {
+        title,
+        content,
+        author_name: authorName || null,
+        location: location || null,
+        mood: mood || null,
+      };
+
       const { error } = await supabase
-        .from("bulletin_posts" as any)
-        .insert({
-          title,
-          content,
-          author_name: authorName || null,
-          location,
-          mood,
-        } as any);
+        .from("bulletin_posts")
+        .insert(newPost);
 
       if (error) throw error;
 
