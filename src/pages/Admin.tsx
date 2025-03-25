@@ -21,10 +21,14 @@ interface Application {
   status: string | null;
 }
 
+const ITEMS_PER_PAGE = 10;
+
 const Admin = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isAuthChecking, setIsAuthChecking] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -51,6 +55,11 @@ const Admin = () => {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  // Reset to first page when search query changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
 
   const handleSignOut = async () => {
     try {
@@ -86,6 +95,22 @@ const Admin = () => {
     },
   });
 
+  // Filter applications based on search query
+  const filteredApplications = applications 
+    ? applications.filter(app => 
+        app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        app.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        app.phone.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
+  // Calculate pagination
+  const totalPages = Math.max(1, Math.ceil(filteredApplications.length / ITEMS_PER_PAGE));
+  const paginatedApplications = filteredApplications.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE, 
+    currentPage * ITEMS_PER_PAGE
+  );
+
   if (isAuthChecking || isLoading) {
     return (
       <div className="min-h-screen bg-background">
@@ -115,13 +140,14 @@ const Admin = () => {
           </Button>
         </div>
         
-        {applications && applications.length > 0 ? (
-          <ApplicationsTable applications={applications} />
-        ) : (
-          <div className="bg-white rounded-lg shadow p-8 text-center">
-            <p className="text-gray-500">No applications found.</p>
-          </div>
-        )}
+        <ApplicationsTable 
+          applications={paginatedApplications} 
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       </div>
     </div>
   );
