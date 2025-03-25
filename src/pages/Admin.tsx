@@ -87,7 +87,7 @@ const Admin = () => {
     queryKey: ["applications"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("applications" as any)
+        .from("applications")
         .select("*")
         .order("created_at", { ascending: false });
 
@@ -103,8 +103,8 @@ const Admin = () => {
   const updateStatusMutation = useMutation({
     mutationFn: async ({ id, status }: { id: string; status: string }) => {
       const { error } = await supabase
-        .from("applications" as any)
-        .update({ status } as any)
+        .from("applications")
+        .update({ status })
         .eq("id", id);
 
       if (error) throw error;
@@ -128,7 +128,7 @@ const Admin = () => {
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       const { error } = await supabase
-        .from("applications" as any)
+        .from("applications")
         .delete()
         .eq("id", id);
 
@@ -198,7 +198,7 @@ const Admin = () => {
                   <TableCell>{application.phone}</TableCell>
                   <TableCell>
                     <Select
-                      defaultValue={application.status}
+                      defaultValue={application.status ?? undefined}
                       onValueChange={(value) =>
                         updateStatusMutation.mutate({ id: application.id, status: value })
                       }
