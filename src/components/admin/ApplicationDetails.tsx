@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/card";
 import { ApplicationStatusSelector } from "./ApplicationStatusSelector";
 import { DeleteApplicationButton } from "./DeleteApplicationButton";
-import { useMediaQuery } from "@/hooks/use-mobile"; // Using existing hook for responsive design
+import { useIsMobile } from "@/hooks/use-mobile"; // Corrected import
 import { CalendarClock, Mail, Phone, ClipboardCheck, Edit3 } from "lucide-react";
 
 interface Application {
@@ -44,7 +44,7 @@ interface ApplicationDetailsProps {
 }
 
 export function ApplicationDetails({ application, isOpen, onClose }: ApplicationDetailsProps) {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = !useIsMobile(); // Using the correct hook and negating for desktop
   
   if (!application) return null;
 
