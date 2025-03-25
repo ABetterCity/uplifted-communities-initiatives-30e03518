@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -9,9 +10,9 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { useState } from "react";
 import { ApplicationStatusSelector } from "./ApplicationStatusSelector";
 import { DeleteApplicationButton } from "./DeleteApplicationButton";
+import { ApplicationDetails } from "./ApplicationDetails";
 
 interface Application {
   id: string;
@@ -41,70 +42,95 @@ export function ApplicationsTable({
   totalPages,
   onPageChange
 }: ApplicationsTableProps) {
+  const [selectedApplication, setSelectedApplication] = useState<Application | null>(null);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+  const handleRowClick = (application: Application) => {
+    setSelectedApplication(application);
+    setIsDetailsOpen(true);
+  };
+
+  const handleCloseDetails = () => {
+    setIsDetailsOpen(false);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow">
-      <div className="p-4 border-b">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-          <Input
-            placeholder="Search by name, email or phone..."
-            value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
-            className="pl-9 w-full"
-          />
+    <>
+      <div className="bg-white rounded-lg shadow">
+        <div className="p-4 border-b">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Input
+              placeholder="Search by name, email or phone..."
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              className="pl-9 w-full"
+            />
+          </div>
         </div>
-      </div>
-      
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Phone</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Submitted</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {applications.length === 0 ? (
+        
+        <Table>
+          <TableHeader>
             <TableRow>
-              <TableCell colSpan={6} className="text-center py-8 text-gray-500">
-                No applications found
-              </TableCell>
+              <TableHead>Name</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Phone</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Submitted</TableHead>
+              <TableHead>Actions</TableHead>
             </TableRow>
-          ) : (
-            applications.map((application) => (
-              <TableRow key={application.id}>
-                <TableCell>{application.name}</TableCell>
-                <TableCell>{application.email}</TableCell>
-                <TableCell>{application.phone}</TableCell>
-                <TableCell>
-                  <ApplicationStatusSelector 
-                    id={application.id} 
-                    currentStatus={application.status} 
-                  />
-                </TableCell>
-                <TableCell>
-                  {new Date(application.created_at).toLocaleDateString()}
-                </TableCell>
-                <TableCell>
-                  <DeleteApplicationButton id={application.id} />
+          </TableHeader>
+          <TableBody>
+            {applications.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={6} className="text-center py-8 text-gray-500">
+                  No applications found
                 </TableCell>
               </TableRow>
-            ))
-          )}
-        </TableBody>
-      </Table>
-      
-      {applications.length > 0 && (
-        <ApplicationsPagination 
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={onPageChange}
-        />
-      )}
-    </div>
+            ) : (
+              applications.map((application) => (
+                <TableRow 
+                  key={application.id}
+                  className="cursor-pointer hover:bg-gray-50"
+                  onClick={() => handleRowClick(application)}
+                >
+                  <TableCell>{application.name}</TableCell>
+                  <TableCell>{application.email}</TableCell>
+                  <TableCell>{application.phone}</TableCell>
+                  <TableCell>
+                    <ApplicationStatusSelector 
+                      id={application.id} 
+                      currentStatus={application.status} 
+                      onClick={(e) => e.stopPropagation()} // Prevent row click when interacting with the selector
+                    />
+                  </TableCell>
+                  <TableCell>
+                    {new Date(application.created_at).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell onClick={(e) => e.stopPropagation()}>
+                    <DeleteApplicationButton id={application.id} />
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+        
+        {applications.length > 0 && (
+          <ApplicationsPagination 
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={onPageChange}
+          />
+        )}
+      </div>
+
+      <ApplicationDetails 
+        application={selectedApplication}
+        isOpen={isDetailsOpen}
+        onClose={handleCloseDetails}
+      />
+    </>
   );
 }
 
